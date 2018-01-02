@@ -13,230 +13,717 @@
   
 
   <script>
-       //basic map config with custom fills, mercator projection
-       var election = new Datamap({
-        scope: 'usa',
-        element: document.getElementById('container1'),
-        geographyConfig: {
-          highlightBorderColor: '#bada55',
-          popupTemplate: function(geography, data) {
-            return '<div class="hoverinfo">' + geography.properties.name + 'Electoral Votes:' +  data.electoralVotes + ' '
-          },
-          highlightBorderWidth: 3
-        },
+   //basic map config with custom fills, mercator projection
+   var state_abbreviation = [
+   "AZ",
+   "CO",
+   "DE",
+   "FL",
+   "GA",
+   "HI",
+   "ID",
+   "IL",
+   "IN",
+   "IA",
+   "KS",
+   "KY",
+   "LA",
+   "MD",
+   "ME",
+   "MA",
+   "MN",
+   "MI",
+   "MS",
+   "MO",
+   "MT",
+   "NC",
+   "NE",
+   "NV",
+   "NH",
+   "NJ",
+   "NY",
+   "ND",
+   "NM",
+   "OH",
+   "OK",
+   "OR",
+   "PA",
+   "RI",
+   "SC",
+   "SD",
+   "TN",
+   "TX",
+   "UT",
+   "WI",
+   "VA",
+   "VT",
+   "WA",
+   "WV",
+   "WY",
+   "CA",
+   "CT",
+   "AK",
+   "AR",
+   "AL"
+   ];
+   var data = {
+    "AZ": {
 
-        fills: {
-          'Republican': '#CC4731',
-          'Democrat': '#306596',
-          'Heavy Democrat': '#667FAF',
-          'Light Democrat': '#A9C0DE',
-          'Heavy Republican': '#CA5E5B',
-          'Light Republican': '#EAA9A8',
-          defaultFill: '#EDDC4E'
+      "City" : "Phoenix" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 33.45000076 ,
+      "longitude" : -112.06999969 ,
+
+      "URL" : "http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/AZ/Phoenix.json"  
+      ,radius:5
+    },
+    "CO": {
+
+      "City" : "Denver" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 39.74000168 ,
+      "longitude" : -104.98000336 ,
+
+      "URL" : "http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/CO/Denver.json"
+      ,radius:5
+    },
+    "DE": {
+
+      "City" : "Dover" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 39.15000153 ,
+      "longitude" : -75.51999664 ,
+
+      "URL" :"http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/DE/Dover.json"
+      ,radius:5
+    },
+    "FL": {
+
+      "City" : "Tallahassee" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 30.43000031 ,
+      "longitude" : -84.26000214 ,
+
+      "URL":"http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/FL/Tallahassee.json"
+      ,radius:5
+    },
+    "GA": {
+
+      "City" : "Atlanta" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 33.75000000 ,
+      "longitude" : -84.38999939 ,
+
+      "URL" : "http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/GA/Atlanta.json"
+      ,radius:5
+    },
+    "HI": {
+
+      "City" : "Honolulu" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 21.30999947 ,
+      "longitude" : -157.86000061 ,
+
+      "URL" : "http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/HI/Honolulu.json"
+      ,radius:5
+    },
+    "ID": {
+
+      "City" : "Boise" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 43.61000061 ,
+      "longitude" : -116.19999695 ,
+
+      "URL" : "http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/ID/Boise.json"
+      ,radius:5
+    },
+    "IL": {
+
+      "City" : "Springfield" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 39.79999924 ,
+      "longitude" : -89.65000153 ,
+
+      "URL" : "http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/IL/Springfield.json"
+      ,radius:5
+    },
+    "IN": {
+
+      "City" : "Indianapolis" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 39.77999878 ,
+      "longitude" : -86.11000061 ,
+
+      "URL" : "http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/IN/Indianapolis.json"
+      ,radius:5
+    },
+    "IA": {
+
+      "City" : "Des Moines" ,
+      "icon" : "",
+      "temp_c" : "",
+      "latitude" : 41.59999847,
+      "longitude" : -93.61000061,
+
+      "URL" : "http://api.wunderground.com/api/7fc2816d0b2bff4e/conditions/q/IA/Des_Moines.json"
+      ,radius:5
+    },
+      //10  
+      "KS": {
+
+        "City" : "Topeka" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 39.09000015,
+        "longitude" : -95.61000061,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/KS/Topeka.json"
+        ,radius:5
+      },
+      "KY": {
+
+        "City" : "Frankfort" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 38.20000076,
+        "longitude" : -84.87000275,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/KY/Frankfort.json"
+        ,radius:5
+      },
+      "LA": {
+
+        "City" : "Baton Rouge" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 30.45000076,
+        "longitude" : -91.19000244,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/LA/Baton_Rouge.json"
+        ,radius:5
+      },
+      "MD": {
+
+        "City" : "Annapolis" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 39.00000000,
+        "longitude" : -76.51000214,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/MD/Annapolis.json"
+        ,radius:5
+      },
+      "ME": {
+
+        "City" : "Augusta" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 44.31999969,
+        "longitude" : -69.76999664,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/ME/Augusta.json"
+        ,radius:5
+      },
+      "MA": {
+
+        "City" : "Boston" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 42.36000061,
+        "longitude" : -71.06999969,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/MA/Boston.json"
+        ,radius:5
+      },
+      "MN": {
+
+        "City" : "Saint Paul" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 44.95000076,
+        "longitude" : -93.08000183,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/MN/Saint_Paul.json"
+        ,radius:5
+      },
+      "MI": {
+
+        "City" : "Lansing" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 42.72999954,
+        "longitude" : -84.55999756,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/MI/Lansing.json"
+        ,radius:5
+      },
+      "MS": {
+
+        "City" : "Jackson" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 32.29999924,
+        "longitude" : -90.18000031,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/MS/Jackson.json"
+        ,radius:5
+      },
+      "MO": {
+
+        "City" : "Jefferson City" ,
+        "icon" : "",
+        "temp_c" : "",
+        "latitude" : 38.54000092,
+        "longitude" : -92.16000366,
+
+        "URL" : "http://api.wunderground.com/api/f8ecf73d481bd516/conditions/q/MO/Jefferson_City.json"
+        ,radius:5
+      },
+        //20
+        "MT": {
+
+          "City" : "Helena" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 46.61000061,
+          "longitude" : -112.05000305,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/MT/Helena.json"
+          ,radius:5
         },
-        data:{
-          "AZ": {
-            "fillKey": "Republican",
-            "electoralVotes": 5
-          },
-          "CO": {
-            "fillKey": "Light Democrat",
-            "electoralVotes": 5
-          },
-          "DE": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "FL": {
-            "fillKey": "UNDECIDED",
-            "electoralVotes": 29
-          },
-          "GA": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "HI": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "ID": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "IL": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "IN": {
-            "fillKey": "Republican",
-            "electoralVotes": 11
-          },
-          "IA": {
-            "fillKey": "Light Democrat",
-            "electoralVotes": 11
-          },
-          "KS": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "KY": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "LA": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "MD": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "ME": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "MA": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "MN": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "MI": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "MS": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "MO": {
-            "fillKey": "Republican",
-            "electoralVotes": 13
-          },
-          "MT": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "NC": {
-            "fillKey": "Light Republican",
-            "electoralVotes": 32
-          },
-          "NE": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "NV": {
-            "fillKey": "Heavy Democrat",
-            "electoralVotes": 32
-          },
-          "NH": {
-            "fillKey": "Light Democrat",
-            "electoralVotes": 32
-          },
-          "NJ": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "NY": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "ND": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "NM": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "OH": {
-            "fillKey": "UNDECIDED",
-            "electoralVotes": 32
-          },
-          "OK": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "OR": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "PA": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "RI": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "SC": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "SD": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "TN": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "TX": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "UT": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "WI": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "VA": {
-            "fillKey": "Light Democrat",
-            "electoralVotes": 32
-          },
-          "VT": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "WA": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "WV": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "WY": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "CA": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "CT": {
-            "fillKey": "Democrat",
-            "electoralVotes": 32
-          },
-          "AK": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "AR": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          },
-          "AL": {
-            "fillKey": "Republican",
-            "electoralVotes": 32
-          }
+        "NC": {
+
+          "City" : "Raleigh" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 35.77000046,
+          "longitude" : -78.62999725,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/NC/Raleigh.json"
+          ,radius:5
+        },
+        "NE": {
+
+          "City" : "Lincoln" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 40.79999924,
+          "longitude" : -96.66999817,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/NE/Lincoln.json"
+          ,radius:5
+        },
+        "NV": {
+
+          "City" : "Carson City" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 39.15000153,
+          "longitude" : -119.75000000,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/NV/Carson_City.json"
+          ,radius:5
+        },
+        "NH": {
+
+          "City" : "Concord" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 43.20999908,
+          "longitude" : -71.54000092,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/NH/Concord.json"
+          ,radius:5
+        },
+        "NJ": {
+
+          "City" : "Trenton" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 40.22000122,
+          "longitude" : -74.73999786,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/NJ/Trenton.json"
+          ,radius:5
+        },
+        "NY": {
+
+          "City" : "Albany" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 42.65000153,
+          "longitude" : -73.76000214,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/NY/Albany.json"
+          ,radius:5
+        },
+        "ND": {
+
+          "City" : "Bismarck" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 46.81999969,
+          "longitude" : -100.69999695,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/ND/Bismarck.json"
+          ,radius:5
+        },
+        "NM": {
+
+          "City" : "Santa Fe" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 35.68999863,
+          "longitude" : -105.94999695,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/NM/Santa_Fe.json"
+          ,radius:5
+        },
+        "OH": {
+
+          "City" : "Columbus" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 40.09999847,
+          "longitude" : -83.01999664,
+          
+          "URL" : "http://api.wunderground.com/api/1b080d2752cccfed/conditions/q/OH/Columbus.json"
+          ,radius:5
+        },
+        ///30
+        "OK": {
+
+          "City" : "Oklahoma City" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 35.47000122,
+          "longitude" : -97.51999664,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/OK/Oklahoma_City.json"
+          ,radius:5
+        },
+        "OR": {
+
+          "City" : "Salem" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 44.93000031,
+          "longitude" : -122.98000336,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/OR/Salem.json"
+          ,radius:5
+        },
+        "PA": {
+
+          "City" : "Harrisburg" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 40.25999832,
+          "longitude" : -76.87999725,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/PA/Harrisburg.json"
+          ,radius:5
+        },
+        "RI": {
+
+          "City" : "Providence" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 41.81999969,
+          "longitude" : -71.41000366,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/RI/Providence.json"
+          ,radius:5
+        },
+        "SC": {
+
+          "City" : "Columbia" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 34.00000000,
+          "longitude" : -81.02999878,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/SC/Columbia.json"
+          ,radius:5
+        },
+        "SD": {
+
+          "City" : "Pierre" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 44.36999893,
+          "longitude" : -100.34999847,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/SD/Pierre.json"
+          ,radius:5
+        },
+        "TN": {
+
+          "City" : "Nashville" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 36.16999817,
+          "longitude" : -86.77999878,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/TN/Nashville.json"
+          ,radius:5
+        },
+        "TX": {
+
+          "City" : "Austin" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 30.27000046,
+          "longitude" : -97.73999786,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/TX/Austin.json"
+          ,radius:5
+        },
+        "UT": {
+
+          "City" : "Salt Lake City" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 40.75999832,
+          "longitude" : -111.90000153,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/UT/Salt_Lake_City.json"
+          ,radius:5
+        },
+        "WI": {
+
+          "City" : "Madison" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 43.06999969,
+          "longitude" : -89.40000153,
+          
+          "URL" : "http://api.wunderground.com/api/b96c785061ec4510/conditions/q/WI/Madison.json"
+          ,radius:5
+        },
+        //40
+        "VA": {
+
+          "City" : "Richmond" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 37.54999924,
+          "longitude" : -77.45999908,
+          
+          "URL" : "http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/VA/Richmond.json"
+          ,radius:5
+        },
+        "VT": {
+
+          "City" : "Montpelier" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 44.25999832,
+          "longitude" : -72.58000183,
+          
+          "URL" : "http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/VT/Montpelier.json"
+          ,radius:5
+        },
+        "WA": {
+
+          "City" : "Olympia" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 47.00999832,
+          "longitude" : -122.87999725,
+          
+          "URL" : "http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/WA/Olympia.json"
+          ,radius:5
+        },
+        "WV": {
+
+          "City" : "Charleston" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 38.34999847,
+          "longitude" : -81.62999725,
+          
+          "URL" : "http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/WV/Charleston.json"
+          ,radius:5
+        },
+        "WY": {
+
+          "City" : "Cheyenne" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 41.13999939,
+          "longitude" : -104.80000305,
+          
+          "URL" : "http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/WY/Cheyenne.json"
+          ,radius:5
+        },
+        "CA": {
+
+          "City" : "Sacramento" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 38.58000183,
+          "longitude" : -121.48999786,
+          
+          "URL" : "http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/CA/Sacramento.json"
+          ,radius:5
+        },
+        "CT": {
+
+          "City" : "Hartford" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 41.77999878,
+          "longitude" : -72.66000366,
+          
+          "URL" :"http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/CT/Hartford.json"
+          ,radius:5
+        },
+        "AK": {
+
+          "City" : "Juneau" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 58.36000061,
+          "longitude" : -134.53999329,
+          
+          "URL" : "http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/AK/Juneau.json "
+          ,radius:5
+        },
+        "AR": {
+
+          "City" : "Little Rock" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 34.75000000,
+          "longitude" : -92.27999878,
+          
+          "URL" : "http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/AR/Little_Rock.json"
+          ,radius:5
+        },
+        "AL": {
+
+          "City" : "Montgomery" ,
+          "icon" : "",
+          "temp_c" : "",
+          "latitude" : 32.36999893,
+          "longitude" : -86.30000305,
+          
+          "URL" : "http://api.wunderground.com/api/b74a479dab9d3c28/conditions/q/AL/Montgomery.json"
+          ,radius:5
         }
-      });
-election.labels();
+      };
+
+
+      var i=0;
+      for(i=0;i<50;i++){
+        var str="";
+        var weather = new XMLHttpRequest();
+        weather.open("GET", data[state_abbreviation[i]]["URL"] , false);
+        weather.send(null);
+
+        var r = JSON.parse(weather.response);
+
+        var dis = "Current location: " + r.current_observation.display_location.full + " <p>";
+        var icon ="Weather : " + r.current_observation.icon +  "  <p>";
+        data[state_abbreviation[i]]["icon"]=r.current_observation.icon;
+        data[state_abbreviation[i]].fillKey=data[state_abbreviation[i]]["icon"];
+        var temp_c ="temp_c : " + r.current_observation.temp_c +  "  <p>";
+        data[state_abbreviation[i]]["temp_c"]=r.current_observation.temp_c;
+
+        str+=(dis);
+        str+=(icon);
+        str+=(temp_c);
+        str+=("<br>");
+
+        var clear=icon.search("clear")
+  //if clear wear hat and sun glasses
+  if(clear>=0){
+    str+=('<img src="'+"Clothes/hat.png"+'" width="48" height="48" >');
+    str+=('<img src="'+"Clothes/sunglasses.png"+'" width="48" height="48" >');
+  }
+
+  str+=("  ");
+
+  //tenp_c detect clothing style
+  if(data[state_abbreviation[i]]["temp_c"] <= 0){
+    str+=('<img src="'+"Clothes/coat.png"+'" width="48" height="48" >');
+    str+=('<img src="'+"Clothes/pants.png"+'" width="48" height="48" >');
+  }
+  else if(data[state_abbreviation[i]]["temp_c"] < 10){
+    str+=('<img src="'+"Clothes/jacket.png"+'" width="48" height="48" >');
+    str+=('<img src="'+"Clothes/pants.png"+'" width="48" height="48" >');
+  }
+  else if(data[state_abbreviation[i]]["temp_c"] < 15) {
+    str+=('<img src="'+"Clothes/longsleeve.png"+'" width="48" height="48" >');
+    str+=('<img src="'+"Clothes/pants.png"+'" width="48" height="48" >');
+  }
+  else if(data[state_abbreviation[i]]["temp_c"] < 20){
+    str+=('<img src="'+"Clothes/shirt.png"+'" width="48" height="48" >');
+    str+=('<img src="'+"Clothes/pants.png"+'" width="48" height="48" >');
+  }
+  else {
+    str+=('<img src="'+"Clothes/shirt.png"+'" width="48" height="48" >');
+    str+=('<img src="'+"Clothes/shorts.png"+'" width="48" height="48" >');
+  }
+  str+=("  ");
+  var snow=icon.search("snow")
+  var rain=icon.search("rain")
+
+  //if rain == slipper else shoes
+  if(rain>=0){
+    str+=('<img src="'+"Clothes/slipper.png"+'" width="48" height="48" >');
+  }
+  else{
+    str+=('<img src="'+"Clothes/shoes.png"+'" width="48" height="48" >');
+  }
+
+  //if rain or snow umbrella
+  str+=("  ");
+  if(snow >=0 || rain >= 0){
+    str+=('<img src="'+"Clothes/umbrella.png"+'" width="48" height="48" >');
+  }
+  
+
+  str+=("<br>");
+  data[state_abbreviation[i]]["output"] = str;
+}
+console.log("data:",data);
+var map = new Datamap({
+  scope: 'usa',
+  element: document.getElementById('container1'),
+  geographyConfig: {
+    popupOnHover: false,
+    highlightOnHover: false
+  },
+
+  
+  fills: {
+    "rain": '#067cc1',
+    "mostlycloudy": '#1da6f7',
+    "clear": '#fdf0af',
+    "hazy": '#88d1fb',
+    "partlycloudy": '#cdecfe',
+    "cloudy": '#57befa',
+    defaultFill: '#cdecfe'
+  },
+  data:data
+});
+var newArrayDataOfOjbect = Object.values(data);
+map.bubbles(newArrayDataOfOjbect, {
+  popupTemplate: function(geo, data) {
+    return '<div class="hoverinfo">' + data["output"];
+  }
+});
+map.labels();
 </script>
 </body>
